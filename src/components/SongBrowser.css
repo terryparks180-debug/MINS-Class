@@ -1,0 +1,99 @@
+.song-browser {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.browser-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.browser-header h2 {
+  margin: 0;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #0f3460;
+  background-color: #16213e;
+  color: #eee;
+  font-size: 1rem;
+}
+
+.browser-content {
+  background-color: #16213e;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.info-message {
+  background-color: #0f3460;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #e94560;
+}
+
+.info-message p {
+  margin: 0.5rem 0;
+  color: #ccc;
+}
+
+.info-message strong {
+  color: #e94560;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #888;
+}
+
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.song-card {
+  background-color: #1a1a2e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.song-card:hover {
+  border-color: #0f3460;
+  transform: translateY(-2px);
+}
+
+.song-card-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.song-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.song-card-meta {
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+  text-align: center;
+}

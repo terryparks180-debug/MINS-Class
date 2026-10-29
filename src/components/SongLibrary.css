@@ -1,0 +1,87 @@
+.song-library {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.library-header h2 {
+  margin: 0;
+}
+
+.import-button {
+  background-color: #e94560;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #16213e;
+  border-radius: 8px;
+  color: #888;
+}
+
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.song-item {
+  background-color: #16213e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.song-item:hover {
+  border-color: #0f3460;
+}
+
+.song-item.active {
+  border-color: #e94560;
+  background-color: #1a1a2e;
+}
+
+.song-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+}
+
+.song-meta {
+  margin: 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.song-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.song-actions button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.share-button {
+  background-color: #0f3460;
+  color: #eee;
+}
+
+.delete-button {
+  background-color: #e94560;
+  color: white;
+}
