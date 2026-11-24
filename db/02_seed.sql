@@ -1,0 +1,96 @@
+
+-- Music Man - Prototype 2
+-- db/02_seed.sql
+-- Fictional sample data for testing
+
+BEGIN;
+
+-- 1. Users
+INSERT INTO "User" (user_id, display_name, email)
+VALUES
+('10000000-0000-4000-8000-000000000001',
+ 'Alex Rivera', 'alex@example.com'),
+('10000000-0000-4000-8000-000000000002',
+ 'Jordan Lee', 'jordan@example.com'),
+('10000000-0000-4000-8000-000000000003',
+ 'Casey Morgan', 'casey@example.com');
+
+-- 2. Songs
+INSERT INTO "Song"
+(song_id, owner_user_id, title, artist, audio_file_path)
+VALUES
+('20000000-0000-4000-8000-000000000001',
+ '10000000-0000-4000-8000-000000000001',
+ 'Morning Practice', 'Alex Rivera', 'demo/morning.mp3'),
+('20000000-0000-4000-8000-000000000002',
+ '10000000-0000-4000-8000-000000000002',
+ 'Evening Groove', 'Jordan Lee', 'demo/evening.mp3'),
+('20000000-0000-4000-8000-000000000003',
+ '10000000-0000-4000-8000-000000000003',
+ 'Weekend Jam', 'Casey Morgan', 'demo/weekend.mp3');
+
+-- 3. Practice Settings
+INSERT INTO "PracticeSetting"
+(setting_id, song_id, tempo_bpm,
+ loop_start_seconds, loop_end_seconds, count_in_beats)
+VALUES
+('30000000-0000-4000-8000-000000000001',
+ '20000000-0000-4000-8000-000000000001',
+ 90, 10, 30, 4),
+('30000000-0000-4000-8000-000000000002',
+ '20000000-0000-4000-8000-000000000002',
+ 110, 15, 45, 4),
+('30000000-0000-4000-8000-000000000003',
+ '20000000-0000-4000-8000-000000000003',
+ 75, 5, 25, 2);
+
+-- 4. Setlists
+INSERT INTO "Setlist"
+(setlist_id, owner_user_id, name)
+VALUES
+('40000000-0000-4000-8000-000000000001',
+ '10000000-0000-4000-8000-000000000001',
+ 'Daily Practice'),
+('40000000-0000-4000-8000-000000000002',
+ '10000000-0000-4000-8000-000000000002',
+ 'Rehearsal Set'),
+('40000000-0000-4000-8000-000000000003',
+ '10000000-0000-4000-8000-000000000003',
+ 'Weekend Session');
+
+-- 5. Setlist Songs
+INSERT INTO "SetlistSong"
+(setlist_song_id, setlist_id, song_id,
+ position, transition_note)
+VALUES
+('50000000-0000-4000-8000-000000000001',
+ '40000000-0000-4000-8000-000000000001',
+ '20000000-0000-4000-8000-000000000001',
+ 1, 'Pause before next song'),
+('50000000-0000-4000-8000-000000000002',
+ '40000000-0000-4000-8000-000000000002',
+ '20000000-0000-4000-8000-000000000002',
+ 1, 'Continue when ready'),
+('50000000-0000-4000-8000-000000000003',
+ '40000000-0000-4000-8000-000000000003',
+ '20000000-0000-4000-8000-000000000003',
+ 1, 'Manual transition');
+
+-- 6. Share Records
+INSERT INTO "ShareRecord"
+(share_id, owner_user_id, song_id, share_token)
+VALUES
+('60000000-0000-4000-8000-000000000001',
+ '10000000-0000-4000-8000-000000000001',
+ '20000000-0000-4000-8000-000000000001',
+ 'demo-share-alex'),
+('60000000-0000-4000-8000-000000000002',
+ '10000000-0000-4000-8000-000000000002',
+ '20000000-0000-4000-8000-000000000002',
+ 'demo-share-jordan'),
+('60000000-0000-4000-8000-000000000003',
+ '10000000-0000-4000-8000-000000000003',
+ '20000000-0000-4000-8000-000000000003',
+ 'demo-share-casey');
+
+COMMIT;
