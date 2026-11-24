@@ -1,3 +1,4 @@
+
 # Music Man
 
 A React application for musicians to practice along with recorded audio, reducing interruptions during practice sessions.
@@ -6,7 +7,17 @@ A React application for musicians to practice along with recorded audio, reducin
 
 Music Man solves the primary problem of reducing interruptions while a musician practices along with recorded audio. The interface prioritizes the controls a musician needs while actively holding or playing an instrument: current song, playback state, loop state, and tempo.
 
+## Documentation
+
+- [Product Requirements Document (PRD)](./docs/PRD.md)
+- [Task List](./docs/TASK_LIST.md)
+- [Workspace Rules](./docs/WORKSPACE_RULES.md)
+
+These documents were created during the scaffolding phase and should be reviewed against the Analyst's latest specification.
+
 ## Technology
+
+### Prototype 1
 
 - **Frontend Framework:** React 18.3.1
 - **Build Tool:** Vite 5.4.0
@@ -14,324 +25,433 @@ Music Man solves the primary problem of reducing interruptions while a musician 
 - **Persistence:** localStorage (browser-side)
 - **Testing:** Vitest, React Testing Library
 - **CI/CD:** GitHub Actions
+- **Node.js:** Version 22
+
+### Prototype 2
+
+The Prototype 2 assignment introduces:
+
+- **Database:** Supabase PostgreSQL
+- **Backend:** Local Node.js/Express API (planned)
+- **Frontend Integration:** React client communicating with the local API (planned)
+- **API Documentation:** OpenAPI 3.0 (pending)
+- **API Testing:** cURL smoke tests (pending)
+
+The database schema and sample data have been created in Supabase. Backend implementation and integration have not yet been verified.
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/terryparks180-debug/MINS-Class.git
 cd MINS-Class
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
+Use Node.js 22 for development.
+
 ## Running the Application
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open http://localhost:5173 in your browser.
 
 ## Running Tests
 
 Run automated tests:
+
 ```bash
 npm test
 ```
 
-Run tests in watch mode:
+Run tests once without watch mode:
+
 ```bash
-npm test -- --watch
+npm test -- --run
 ```
+
+Run the linter:
+
+```bash
+npm run lint
+```
+
+Passing results have not yet been verified for the current merged project.
 
 ## Building for Production
 
 Create a production build:
+
 ```bash
 npm run build
 ```
 
 Preview the production build:
+
 ```bash
 npm run preview
 ```
 
 ## Level 1 User Stories
 
-### 1. IMPORT AUDIO ✅ COMPLETE
-**As a practicing musician, I want to import an audio file into Music Man so that I can practice with the recording I need.**
+The following ten user stories were selected for Music Man and carried forward into the Analyst's Level 2 Specification.
 
-**Implementation:**
-- File import via standard HTML file input
-- Supports all audio formats accepted by the browser
-- Audio files are stored as base64 data URLs in localStorage
-- No YouTube downloading or scraping implemented (per requirements)
+The implementation descriptions below reflect the Prototype 1 design. They should not be interpreted as additional client requirements.
+
+### 1. Import Audio
+
+**User Story:** As a practicing musician, I want to import an audio file so that I can practice with the recording I need.
+
+**Prototype 1 Implementation:**
+
+- File import using a browser file input
+- Browser-supported audio formats
+- Audio data stored locally using base64 data URLs
+- No YouTube downloading or scraping
 
 **Component:** `SongLibrary.jsx`
 
----
+### 2. Section Looping
 
-### 2. SECTION LOOPING ✅ COMPLETE
-**As a practicing musician, I want to select a start and end point and loop that section so that I can repeatedly practice a difficult passage without stopping to rewind.**
+**User Story:** As a practicing musician, I want to select loop start and end points so that I can repeat a difficult passage without stopping to rewind.
 
-**Implementation:**
+**Prototype 1 Implementation:**
+
 - Loop enable/disable toggle
-- Loop start point slider (0 to song duration)
-- Loop end point slider (0 to song duration)
-- Visual display of current loop state
-- Automatic looping when enabled
+- Loop start and end controls
+- Visual loop status
+- Repeated playback of the selected section
 
 **Component:** `AudioPlayer.jsx`
 
----
+### 3. Tempo Control
 
-### 3. TEMPO CONTROL ✅ COMPLETE
-**As a practicing musician, I want to change the playback tempo of a song so that I can practice difficult music slowly and increase the speed as I improve.**
+**User Story:** As a practicing musician, I want to adjust playback tempo so that I can start slowly and increase speed as I improve.
 
-**Implementation:**
-- Tempo slider (50% to 150%)
-- Real-time tempo adjustment during playback
-- Visual display of current tempo percentage
-- Uses Web Audio API playbackRate
+**Prototype 1 Implementation:**
+
+- Playback speed adjustment from 50% to 150%
+- Real-time playback rate changes
+- Visual tempo percentage display
+- Browser audio playback functionality
 
 **Component:** `AudioPlayer.jsx`
 
----
+### 4. Metronome
 
-### 4. METRONOME ✅ COMPLETE
-**As a practicing musician, I want to use a metronome while practicing so that I can maintain a consistent beat while playing.**
+**User Story:** As a practicing musician, I want to use a metronome so that I can keep a consistent beat.
 
-**Implementation:**
-- Adjustable BPM (40-240)
-- Visual beat indicator (4 beats per measure)
+**Prototype 1 Implementation:**
+
+- Adjustable BPM
 - Audio click on each beat
-- Start/Stop control
-- Always visible in top-right corner
+- Visual beat indicator
+- Start and stop controls
 
 **Component:** `Metronome.jsx`
 
----
+### 5. Count-In
 
-### 5. COUNT-IN ✅ COMPLETE
-**As a practicing musician, I want to use a count-in before playback begins so that I have time to prepare my instrument before the music starts.**
+**User Story:** As a practicing musician, I want a count-in before playback so that I have time to prepare.
 
-**Implementation:**
-- Configurable count-in beats (default: 4)
-- Visual count display
-- Automatic start after count-in completes
-- Only triggers when starting from beginning of song
+**Prototype 1 Implementation:**
+
+- Configurable count-in beats
+- Visual countdown
+- Playback begins after the count-in
+- Default count-in settings selected during implementation
 
 **Component:** `AudioPlayer.jsx`
 
----
+The exact count-in behavior and defaults are Builder implementation decisions unless confirmed by the Client or Analyst.
 
-### 6. SAVE / MODIFY SONGS ✅ COMPLETE
-**As a practicing musician, I want to save changes I make to a song so that my practice setup is available the next time I use the song.**
+### 6. Save / Modify Songs
 
-**Implementation:**
-- Automatic persistence to localStorage
-- Saves: song name, tempo, loop start/end, loop enabled state
-- No user accounts (per requirements)
-- Data persists across browser sessions
+**User Story:** As a practicing musician, I want to save song settings so that I can reuse my practice setup.
 
-**Persisted Data:**
-```javascript
-{
-  id: string,
-  name: string,
-  audioData: string (base64),
-  tempo: number (0.5-1.5),
-  loopStart: number | null,
-  loopEnd: number | null,
-  loopEnabled: boolean,
-  createdAt: string (ISO timestamp)
-}
-```
+**Prototype 1 Implementation:**
 
-**Component:** `App.jsx` (state management)
+- Browser localStorage persistence
+- Saved song names
+- Saved tempo settings
+- Saved loop start and end points
+- Saved loop enabled state
 
----
+**Component:** `App.jsx`
 
-### 7. SETLISTS ✅ COMPLETE
-**As a performing musician, I want to create and organize a setlist so that I can keep songs in the order I plan to perform them.**
+Prototype 2 introduces database persistence, which will require additional integration work.
 
-**Implementation:**
+### 7. Setlists
+
+**User Story:** As a performing musician, I want to create and reorder setlists so that songs follow my intended performance order.
+
+**Prototype 1 Implementation:**
+
 - Create named setlists
-- Add songs to setlists
-- Reorder songs with up/down arrows
-- Remove songs from setlists
-- Delete entire setlists
-- Display song count per setlist
+- Add songs
+- Reorder songs
+- Remove songs
+- Delete setlists
+- Display song counts
 
 **Component:** `SetlistManager.jsx`
 
----
+### 8. Song Transitions
 
-### 8. SONG TRANSITIONS ⚠️ PARTIAL - REQUIRES CLARIFICATION
-**As a performing musician, I want to control the transition from one song to the next in a setlist so that I can move through a performance or rehearsal smoothly.**
+**User Story:** As a performing musician, I want to advance between setlist songs so that rehearsal flows smoothly.
 
-**Implementation:**
-- "Play Next Song" button in setlist view
-- Manual song selection from setlist
-- Reorder capability
+**Prototype 1 Implementation:**
 
-**Limitation:**
-The specification "control the transition" is ambiguous. Current implementation provides manual navigation through setlists. The following require product decisions:
-- Crossfade between songs?
-- Automatic transition timing?
-- Custom transition points?
-- Gapless playback?
+- Manual song selection
+- Play Next Song control
+- Setlist navigation
+
+**Status:** Partially implemented; exact transition behavior requires clarification.
+
+Unresolved possibilities include:
+
+- Automatic transitions
+- Crossfading
+- Gapless playback
+- Custom transition timing
+
+These behaviors are not automatically required.
 
 **Component:** `SetlistManager.jsx`
 
----
+### 9. Search / Browse
 
-### 9. SEARCH / BROWSE ⚠️ PARTIAL - BLOCKED BY PRODUCT DECISION
-**As a musician, I want to search and browse available songs so that I can quickly locate music I want to practice.**
+**User Story:** As a musician, I want to find songs by searching or browsing so that I can quickly locate practice material.
 
-**Implementation:**
-- Search/browse UI created
-- Search filters local song library
-- Grid view of songs
-- Clear messaging about current limitation
+**Prototype 1 Implementation:**
 
-**Blocker:**
-The source of the available-song catalog has NOT been decided. Per requirements:
-- No Spotify integration
-- No YouTube integration
-- No Apple Music integration
-- No music API selected
-- No external song database
-- No web scraping
+- Search interface
+- Search of locally imported songs
+- Song browsing interface
 
-**Current Behavior:**
-Search/Browse only shows locally imported songs. To connect to an external music service, a product decision is needed from the Client/Analyst.
+**Status:** Partially implemented.
+
+The source of the song catalog has not been fully specified. No external music API has been approved.
 
 **Component:** `SongBrowser.jsx`
 
----
+### 10. Sharing
 
-### 10. SHARING ⚠️ PARTIAL - BLOCKED BY PRODUCT DECISION
-**As a musician, I want to share a saved song or practice setup so that I can give another musician the same practice material.**
+**User Story:** As a musician, I want to share a saved song or practice setup so that another musician can use the same material.
 
-**Implementation:**
-- "Share Config" button copies song configuration to clipboard
-- Exports as JSON (name, tempo, loop settings)
-- Does NOT include audio file (too large for clipboard)
+**Prototype 1 Implementation:**
 
-**Limitation:**
-The exact sharing mechanism is not defined. Per requirements:
-- No user accounts
-- No cloud storage
-- No social networking
-- No public profiles
-- No third-party integrations
+- Clipboard-based configuration sharing
+- JSON containing practice settings
+- Audio files are not included in clipboard exports
 
-**Current Behavior:**
-Clipboard-based configuration sharing. To implement full sharing (e.g., file export/import, cloud sync, etc.), a product decision is needed from the Client/Analyst.
+**Status:** Partially implemented.
+
+The sharing mechanism, permissions, and account requirements still need clarification.
 
 **Component:** `SongLibrary.jsx`
 
----
-
 ## Project Structure
 
-```
+The Prototype 1 React application includes:
+
+```text
 src/
-├── App.jsx                    # Main application component
-├── App.css                    # Global styles
-├── index.css                  # Base styles
-├── main.jsx                   # React entry point
-├── components/
-│   ├── AudioPlayer.jsx        # Audio playback with loop, tempo, count-in
-│   ├── AudioPlayer.css
-│   ├── SongLibrary.jsx        # Song import and management
-│   ├── SongLibrary.css
-│   ├── SetlistManager.jsx     # Setlist creation and management
-│   ├── SetlistManager.css
-│   ├── SongBrowser.jsx        # Search/browse UI
-│   ├── SongBrowser.css
-│   └── Metronome.jsx          # Metronome component
-│   └── Metronome.css
-└── test/
-    ├── setup.js               # Test configuration
-    ├── App.test.jsx           # App component tests
-    ├── SongLibrary.test.jsx   # Song library tests
-    ├── SetlistManager.test.jsx # Setlist manager tests
-    └── SongBrowser.test.jsx   # Song browser tests
+  App.jsx
+  App.css
+  index.css
+  main.jsx
+  components/
+    AudioPlayer.jsx
+    AudioPlayer.css
+    SongLibrary.jsx
+    SongLibrary.css
+    SetlistManager.jsx
+    SetlistManager.css
+    SongBrowser.jsx
+    SongBrowser.css
+    Metronome.jsx
+    Metronome.css
+  test/
+    setup.js
+    App.test.jsx
+    SongLibrary.test.jsx
+    SetlistManager.test.jsx
+    SongBrowser.test.jsx
 ```
+
+Project documentation:
+
+```text
+docs/
+  PRD.md
+  TASK_LIST.md
+  WORKSPACE_RULES.md
+```
+
+Prototype 2 database scripts:
+
+```text
+db/
+  01_schema.sql
+  02_seed.sql
+```
+
+The local API and related testing files are required for Prototype 2 but have not yet been completed or verified.
+
+## Prototype 2 Database
+
+The Analyst's Level 2 Specification proposes six database entities:
+
+1. User
+2. Song
+3. PracticeSetting
+4. Setlist
+5. SetlistSong
+6. ShareRecord
+
+The schema and seed scripts are stored in:
+
+- `db/01_schema.sql`
+- `db/02_seed.sql`
+
+The scripts create the tables and insert three fictional test records per table.
+
+The scripts were executed successfully in Supabase, and the records were verified.
+
+The scripts still need to be verified together on a clean database project to fully satisfy the reproducibility requirement.
+
+### Database Design Notes
+
+The Analyst describes the six entities as a proposed implementation model.
+
+The User table does not automatically require user authentication.
+
+The current database contains fictional sample users for testing. Account registration, login, authorization, and sharing permissions require further clarification.
+
+## Prototype 2 Backend Requirements
+
+The Prototype 2 assignment requires a local backend API.
+
+Planned implementation:
+
+- Local Node.js/Express server
+- Supabase database connection
+- At least three GET endpoints
+- At least one write endpoint
+- React client communicates with the local API
+- No direct client-to-Supabase communication
+- Environment variables for database credentials
+- OpenAPI 3.0 documentation
+- cURL smoke tests
+
+Required repository artifacts:
+
+```text
+api/
+  openapi.yaml
+  README.md
+
+tests/
+  smoke.sh
+```
+
+The backend must use the Supabase service role key only in the server environment.
+
+Secrets must never be committed to GitHub or exposed in frontend code.
 
 ## Major Implementation Decisions
 
-1. **Audio Storage:** Audio files stored as base64 in localStorage due to no backend requirement. This limits file size but allows persistence without authentication.
+### Prototype 1
 
-2. **No Backend:** All functionality implemented client-side per requirements. No database, no server, no authentication.
+1. **Audio Storage:** Browser localStorage with base64 audio data.
+2. **Frontend:** React and Vite.
+3. **Audio Processing:** Browser audio functionality.
+4. **Persistence:** Local browser storage.
+5. **Count-In:** Prototype-specific timing and default values.
+6. **Sharing:** Clipboard-based JSON configuration export.
 
-3. **Web Audio API:** Used for audio playback, tempo control, and metronome. Provides precise timing and tempo adjustment.
+These are implementation decisions and should not automatically be interpreted as Analyst or Client requirements.
 
-4. **localStorage:** Chosen for persistence as it requires no authentication and works entirely client-side.
+### Prototype 2
 
-5. **Count-in Timing:** Fixed at 120 BPM for count-in (simple implementation). Could be made configurable if needed.
-
-6. **Sharing:** Clipboard-based JSON export only. Audio files not included due to size limitations.
+1. **Database:** Supabase PostgreSQL, required by the Prototype 2 assignment.
+2. **Schema:** Based on the Analyst's Level 2 proposed data model.
+3. **Backend:** Local API required by the assignment.
+4. **API Architecture:** Frontend communicates with the local API rather than directly with Supabase.
+5. **Testing:** API smoke tests and existing frontend verification.
 
 ## Known Limitations
 
-1. **File Size:** localStorage has limits (~5-10MB). Large audio files may fail to save.
-
-2. **Browser Compatibility:** Web Audio API support varies. Modern browsers (Chrome, Firefox, Safari, Edge) supported.
-
-3. **No External Music:** Cannot access Spotify, YouTube, etc. (blocked by requirements).
-
-4. **Song Transitions:** Manual only. No crossfade or automatic transitions (requires product decision).
-
-5. **Audio Format Support:** Limited to formats supported by the user's browser.
-
-6. **Metronome:** Fixed 4/4 time signature visualization.
+- Browser localStorage has limited storage capacity.
+- Audio playback depends on browser-supported formats.
+- External music catalog integration has not been specified.
+- Song transition behavior requires clarification.
+- Sharing mechanisms and permissions require clarification.
+- Prototype 2 backend integration is not yet verified.
+- Current lint, automated test, and production build results need verification.
 
 ## CI/CD
 
-GitHub Actions workflow configured for:
-- Checkout repository
-- Setup Node.js 18.x
-- Install dependencies (npm ci)
-- Run linter (npm run lint)
-- Run tests (npm test -- --run)
-- Build application (npm run build)
-- Upload build artifacts
+GitHub Actions is configured to:
 
-**Note:** AWS Amplify deployment has intentionally NOT been configured yet. This will be added separately later per project requirements.
+1. Check out the repository.
+2. Set up Node.js 22.
+3. Install dependencies using `npm ci`.
+4. Run ESLint using `npm run lint`.
+5. Run automated tests using `npm test -- --run`.
+6. Build the application using `npm run build`.
+7. Upload build artifacts.
+
+Required verification steps must fail when errors occur.
+
+The current pipeline's passing status has not been verified.
 
 ## Deployment Status
 
-⚠️ **NOT DEPLOYED**
+**Not deployed to AWS.**
 
-AWS Amplify deployment has not been configured. The application is currently for local development and testing only.
+AWS Amplify deployment has not been configured.
 
-## Questions for Client/Analyst
+The application is currently being developed and tested locally.
 
-1. **Story 8 (Song Transitions):** What specific transition control is required? Options include:
-   - Crossfade between songs?
-   - Automatic timing rules?
-   - Custom transition points?
-   - Gapless playback?
+## Questions for Client / Analyst
 
-2. **Story 9 (Search/Browse):** What should be the source of the song catalog? Options include:
-   - Local only (current implementation)
-   - Specific music API (which one?)
-   - File-based catalog
-   - Other approach?
+### Story 8 — Song Transitions
 
-3. **Story 10 (Sharing):** What sharing mechanism should be implemented? Options include:
-   - File export/import (JSON config)
-   - Cloud storage (requires backend/infrastructure)
-   - Email/link sharing (requires backend)
-   - Other approach?
+What exact transition behavior is required?
+
+Manual navigation exists in the prototype, but automatic transitions, crossfading, and other timing behaviors have not been confirmed.
+
+### Story 9 — Search / Browse
+
+What is the intended source of the searchable song catalog?
+
+The current prototype searches locally imported songs.
+
+### Story 10 — Sharing
+
+What sharing mechanism and permissions are required?
+
+The current prototype uses clipboard-based configuration sharing.
+
+### User Accounts
+
+The Level 2 database schema proposes a User entity.
+
+Does this represent actual user accounts, or is it only a database ownership model for the prototype?
+
+Authentication and account management should not be implemented without clarification.
 
 ## Development Team
 
@@ -341,4 +461,8 @@ AWS Amplify deployment has not been configured. The application is currently for
 
 ## Course
 
-MINS 350 Business Analyst / Agile Class Project
+MINS 350 — Fall 2026
+
+## Repository
+
+https://github.com/terryparks180-debug/MINS-Class
